@@ -11,12 +11,15 @@ const float SOUND_SPEED = 340.0 / 1000;
 Distance::Distance(int mTriggerPin, int mEchoPin) {
   triggerPin = mTriggerPin;
   echoPin = mEchoPin;
-  pinMode(mTriggerPin, OUTPUT);
-  pinMode(mEchoPin, INPUT);
+}
+
+void Distance::init() {
+  pinMode(triggerPin, OUTPUT);
+  pinMode(echoPin, INPUT);
 }
 
 /**
- * Renvoie la distance en millimètres
+ * Renvoie la distance en millimètre
  */
 float Distance::measure() {
   /* 1. Lance une mesure de distance en envoyant une impulsion HIGH de 10µs sur la broche TRIGGER */
@@ -28,5 +31,5 @@ float Distance::measure() {
   long measure = pulseIn(echoPin, HIGH, MEASURE_TIMEOUT);
 
   /* 3. Calcul la distance à partir du temps mesuré */
-  return measure / 2.0 * SOUND_SPEED;
+  return  measure / 2.0 * SOUND_SPEED;
 }

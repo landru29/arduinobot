@@ -4,6 +4,7 @@
 class Distance {
   public:
     Distance(int mTriggerPin, int mEchoPin);
+    void init();
     float measure();
 
  private:

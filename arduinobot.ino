@@ -4,11 +4,17 @@
 Distance frontIntruder(DISTANCE_FRONT_TRIGGER_PIN, DISTANCE_FRONT_ECHO_PIN);
 
 void setup() {
-  // put your setup code here, to run once:
+
+
+  Serial.begin(115200);
+  frontIntruder.init();
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
 
+  int dist = frontIntruder.measure();
+
+  Serial.println(dist);
+  delay(1000);
 }
