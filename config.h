@@ -1,0 +1,8 @@
+
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#define DISTANCE_FRONT_TRIGGER_PIN 1
+#define DISTANCE_FRONT_ECHO_PIN 1
+
+#endif
