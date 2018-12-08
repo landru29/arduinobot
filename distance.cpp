@@ -11,9 +11,6 @@ const float SOUND_SPEED = 340.0 / 1000;
 Distance::Distance(int mTriggerPin, int mEchoPin) {
   triggerPin = mTriggerPin;
   echoPin = mEchoPin;
-}
-
-void Distance::init() {
   pinMode(triggerPin, OUTPUT);
   pinMode(echoPin, INPUT);
 }
