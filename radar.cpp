@@ -1,14 +1,18 @@
-#include "distance.h"
-
 #include <Arduino.h>
+#include "radar.h"
 
-/* Constantes pour le timeout: 25ms = ~8m à 340m/s */
+/** 
+ *  Constantes pour le timeout: 25ms = ~8m à 340m/s
+ *  En informatique, un "timeout" c'est le temps au bout duquel on abandonne.
+ *  Ici, on considère que si au bout de 25ms (qui correspondrait un un obstable à 8m),
+ *  on n'a pas reçu l'écho, on arrête la mesure)
+ */
 const unsigned long MEASURE_TIMEOUT = 25000UL;
 
 /* Vitesse du son dans l'air en mm/us */
 const float SOUND_SPEED = 340.0 / 1000;
 
-Distance::Distance(int mTriggerPin, int mEchoPin) {
+Radar::Radar(int mTriggerPin, int mEchoPin) {
   triggerPin = mTriggerPin;
   echoPin = mEchoPin;
   pinMode(triggerPin, OUTPUT);
@@ -18,7 +22,7 @@ Distance::Distance(int mTriggerPin, int mEchoPin) {
 /**
  * Renvoie la distance en millimètre
  */
-float Distance::measure() {
+float Radar::distance() {
   /* 1. Lance une mesure de distance en envoyant une impulsion HIGH de 10µs sur la broche TRIGGER */
   digitalWrite(triggerPin, HIGH);
   delayMicroseconds(10);
@@ -28,5 +32,10 @@ float Distance::measure() {
   long measure = pulseIn(echoPin, HIGH, MEASURE_TIMEOUT);
 
   /* 3. Calcul la distance à partir du temps mesuré */
-  return  measure / 2.0 * SOUND_SPEED;
+  float result = measure / 2.0 * SOUND_SPEED;
+
+  Serial.println(String("[R] Distance ") + result + String(" / mm"));
+
+  
+  return  result;
 }
