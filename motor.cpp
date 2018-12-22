@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "motor.h"
 #include "roue.h"
+#include "radar.h"
 
 /**
  * Les moteurs sont couplés:
@@ -61,6 +62,19 @@ void Motor::avant(int pas) {
   }
 }
 
+void Motor::avant(Radar radar, float distanceMm) {
+  if (distanceMm <= 0) return;
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+  bool distanceReached = false;
+  while (!distanceReached) {
+    distanceReached = (radar.distance() < distanceMm);
+    delay(300);
+  }
+}
+
 void Motor::arriere(int pas) {
   digitalWrite(in1, LOW);
   digitalWrite(in2, HIGH);
@@ -74,6 +88,19 @@ void Motor::arriere(int pas) {
     }
     arret();
     Serial.println(String("[M] Arrière ") + Roue::counterLeft + String(" / 20"));
+  }
+}
+
+void Motor::arriere(Radar radar, float distanceMm) {
+  if (distanceMm <= 0) return;
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
+  bool distanceReached = false;
+  while (!distanceReached) {
+    distanceReached = (radar.distance() < distanceMm);
+    delay(300);
   }
 }
 

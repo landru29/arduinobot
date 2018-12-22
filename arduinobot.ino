@@ -25,7 +25,7 @@ void loop() {
 
   
 
-  moteur.avantDroite(5 * Roue::steps);
+  //moteur.avantDroite(5 * Roue::steps);
 
   /* while (true) {
     Serial.println(radarAvant.mesure());
@@ -40,7 +40,9 @@ void loop() {
     
   }*/
 
-  radarAvant.distance();
+  //radarAvant.distance();
+
+  moteur.avant(radarAvant, 100);
 
   while (true) {
 

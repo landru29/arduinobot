@@ -58,4 +58,4 @@ unsigned long Roue::counterLeft = 0;
 /**
  * 20 Trous dans la roue
  */
-static int Roue::steps = 20;
+int Roue::steps = 20;

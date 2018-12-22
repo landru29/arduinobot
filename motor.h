@@ -1,11 +1,15 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
+#include "radar.h"
+
 class Motor {
   public:
     Motor(int mIN1, int mIN2, int mIN3, int mIN4);
     void avant(int tours);
+    void avant(Radar radar, float distanceMm);
     void arriere(int tours);
+    void arriere(Radar radar, float distanceMm);
     void droite(int tours);
     void avantDroite(int tours);
     void arriereDroite(int tours);
