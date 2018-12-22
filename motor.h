@@ -3,6 +3,8 @@
 
 #include "radar.h"
 
+const float PERIMETRE = 212.0;
+
 class Motor {
   public:
     Motor(int mIN1, int mIN2, int mIN3, int mIN4);

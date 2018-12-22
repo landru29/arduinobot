@@ -23,34 +23,9 @@ void setup() {
 
 void loop() {
 
-  
-
-  //moteur.avantDroite(5 * Roue::steps);
-
-  /* while (true) {
-    Serial.println(radarAvant.mesure());
-    Serial.println(radarArriere.mesure());
-
-    if (radarAvant.mesure() < 100) {
-      moteur.arret();
-    }
-    
-    delay(1000);
-
-    
-  }*/
-
-  //radarAvant.distance();
-
   moteur.avant(radarAvant, 100);
+  delay(500);
+  moteur.arriereDroite(100);
+  delay(500);
 
-  while (true) {
-
-    //Serial.println(roues.compteurGauche());
-    //Serial.println(roues.compteurDroite());
-  
-    delay(1000);
-  }
-
-  delay(1000);
 }

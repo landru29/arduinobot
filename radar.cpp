@@ -28,14 +28,21 @@ float Radar::distance() {
   delayMicroseconds(10);
   digitalWrite(triggerPin, LOW);
 
-  /* 2. Mesure le temps entre l'envoi de l'impulsion ultrasonique et son écho (si il existe) */
-  long measure = pulseIn(echoPin, HIGH, MEASURE_TIMEOUT);
-
-  /* 3. Calcul la distance à partir du temps mesuré */
-  float result = measure / 2.0 * SOUND_SPEED;
-
-  Serial.println(String("[R] Distance ") + result + String(" / mm"));
-
   
-  return  result;
+  long measure = 0;
+  for(int i=0; i<5; i++) {
+    
+    /* 2. Mesure le temps entre l'envoi de l'impulsion ultrasonique et son écho (si il existe) */
+    long measure = pulseIn(echoPin, HIGH, MEASURE_TIMEOUT);
+
+    if (measure > 0) {
+      /* 3. Calcul la distance à partir du temps mesuré */
+      float result = measure / 2.0 * SOUND_SPEED;
+  
+      Serial.println(String("[R] Distance ") + result + String(" / mm"));
+  
+      return  result;
+    }
+  }
+  return 10000;
 }
